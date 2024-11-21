@@ -1,0 +1,12 @@
+:Erase the startup config:
+ . write Erase
+ . erase startup-config
+ . erase nvram:
+
+: Erase vlan database:
+  . delete flash:vlan.dat
+
+:Erase running config
+ . Power off then on
+ . Use reload command
+ 
