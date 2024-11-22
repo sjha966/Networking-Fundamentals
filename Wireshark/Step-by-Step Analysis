@@ -1,0 +1,32 @@
+Open the PCAP file in Wireshark
+	1. Load the File:
+		○ Open Wireshark.
+		○ Click File > Open and select your PCAP file.
+2. Identify the TCP Handshake
+	1. Filter for TCP Handshake:
+		○ Use the display filter: tcp.flags.syn == 1 && tcp.flags.ack == 0
+		○ This filter shows only the SYN packets which are the initial packets in a TCP handshake.
+	2. Identify SYN-ACK and ACK:
+		○ Look for the SYN-ACK packets using: tcp.flags.syn == 1 && tcp.flags.ack == 1
+		○ Then, identify the final ACK of the handshake: tcp.flags.ack == 1 && tcp.len == 0
+	3. Timestamp Extraction:
+		○ Note the timestamps of these packets. The sequence for a complete TCP handshake is SYN -> SYN-ACK -> ACK.
+3. Data Push and Session Establishment
+	1. Filter for Data Packets:
+		○ Use the filter: tcp.len > 0
+		○ This filter shows packets containing data (i.e., not just ACKs).
+	2. Session Establishment:
+		○ The session is considered established once the handshake is complete and data packets start flowing. The timestamp of the first data packet can be taken as the session establishment time.
+4. Session Termination
+	1. Filter for FIN Packets:
+		○ Use the filter: tcp.flags.fin == 1
+		○ This shows the packets used to terminate the connection.
+	2. Filter for RST Packets:
+		○ Sometimes connections can be terminated abruptly using RST packets: tcp.flags.reset == 1
+	3. Timestamp Extraction:
+		○ Note the timestamps of the FIN or RST packets to determine when the session is being terminated.
+5. Latency Analysis
+	1. Round-Trip Time (RTT):
+		○ Wireshark can calculate RTT for you. Right-click on a TCP packet and select Follow > TCP Stream. In the stream view, Wireshark will show you the RTT for each packet.
+	2. TCP Stream Graph:
+		○ Go to Statistics > TCP Stream Graph > Round Trip Time Graph to visualize the latency over time.

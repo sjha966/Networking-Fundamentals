@@ -1,0 +1,37 @@
+A few useful ones:
+	• tcp.analysis.flags - Shows an overview of all TCP flag occurrences.
+	• tcp.flags - Displays a detailed breakdown of TCP flags set per packet.
+	• tcp.flags.reset - Filters specifically for RST/reset flags.
+	• tcp.flags.syn - Finds just the connection start SYN packets.
+	• tcp.flags.ack - Shows ACK-only packets for seeing data flows.
+	• tcp.flags.push - Filters data push flags.
+Can also combine with other filters like for TCP ports:
+	• tcp.port == 80 and tcp.flags - Check flags on HTTP traffic only.
+	• tcp.analysis.retransmission - Highlights suspected retransmissions.
+	• tcp.analysis.lost_segment - Indicates possible missing data.
+	• tcp.window_size_value - Tracks receive window size changes.
+Some other useful TCP analysis filters:
+	• tcp.stream eq n - Focus on a specific TCP stream/connection.
+	• tcp.segments_out_of_order - Detect out-of-order delivery.
+	• tcp.time_delta - Times between sequential packets.
+
+
+
+Here are some useful Wireshark display filters for analyzing network latency and slowness issues:
+Check TCP round-trip time (RTT):
+tcp.analysis.ack_rtt - Calculates RTT based on acknowledgements. Useful for estimating latency.
+Check sequence delta time:
+tcp.time_delta - Measures time between TCP sequence numbers. Can find large gaps indicating delays.
+Filter by high latency thresholds:
+tcp.analysis.ack_rtt > 200 - Shows ACK RTTs over 200ms, for example.
+Check TCP retransmission time:
+tcp.analysis.retransmission.time - Measures time between original send and retransmit. High times indicate packet loss or congestion.
+Compare application data vs ACK times:
+tcp.time_delta - Time between app packets.
+tcp.analysis.ack_rtt - ACK RTTs should correlate if network is performing well.
+Check sliding window size:
+tcp.window_size - Window shrinking over time indicates congestion.
+Some other ideas:
+	• Focus on a TCP conversation using tcp.stream eq n
+	• Check duplicate ACKs with frame.number eq n
+Filter HTTP requests http.request to inspect server response times

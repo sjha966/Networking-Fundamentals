@@ -1,0 +1,74 @@
+To diagnose retransmissions and potential bottlenecks in your network using Wireshark, you can use a series of display filters and commands. Here’s a comprehensive guide to help you analyze the traffic effectively:
+1. Identify Retransmissions
+
+Retransmissions can indicate network issues. Use the following display filters to find them:
+
+    TCP Retransmissions:
+
+    tcp.analysis.retransmission
+
+    This filter shows all TCP packets that have been retransmitted.
+
+    TCP Fast Retransmissions:
+
+    tcp.analysis.fast_retransmission
+
+    This filter highlights packets that were retransmitted quickly, often due to packet loss.
+
+    TCP Duplicate Acknowledgments:
+
+    tcp.analysis.duplicate_ack
+
+    This filter shows duplicate ACKs, which can indicate that packets are being lost.
+
+2. Check for Bottlenecks
+
+To identify potential bottlenecks, you can analyze throughput and latency:
+
+    Throughput Analysis: Use the following filter to view TCP streams:
+
+    tcp.stream eq <stream_number>
+
+    Replace <stream_number> with the specific stream number you want to analyze. You can find the stream number by right-clicking on a TCP packet and selecting "Follow" > "TCP Stream."
+
+    Calculate Round Trip Time (RTT): To analyze RTT, you can use:
+
+    tcp.analysis.rtt
+
+    This will help you visualize the round trip times for TCP packets.
+
+3. Visualize Traffic
+
+Wireshark provides graphical tools to visualize traffic, which can help identify bottlenecks:
+
+    IO Graphs:
+        Go to Statistics > IO Graphs.
+        Set up graphs to visualize packets per second or bytes per second over time. This can help you spot periods of high traffic or drops in throughput.
+
+4. Analyze TCP Streams
+
+To get detailed information about a specific TCP stream:
+
+    Follow TCP Stream:
+        Right-click on a TCP packet and select Follow > TCP Stream. This will show you the entire conversation between the two endpoints, allowing you to analyze the sequence of packets and any retransmissions.
+
+5. Check for Other Issues
+
+    Packet Loss: Use the filter:
+
+    tcp.analysis.lost_segment
+
+    This will show you segments that were lost and not retransmitted.
+
+    Window Size: Analyze the TCP window size to check for flow control issues. Use:
+
+    tcp.window_size
+
+    A consistently small window size can indicate a bottleneck.
+
+6. Export and Analyze Data
+
+If you need to analyze the data further:
+
+    Export Packet Dissections:
+        Go to File > Export Packet Dissections > As CSV. This allows you to analyze the data in a spreadsheet for more detailed analysis.
