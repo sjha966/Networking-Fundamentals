@@ -1,0 +1,44 @@
+AAA / TACACS on a fresh box
+
+If you configure AAA new-model and point it to TACACS servers before the box has working connectivity to those servers:
+
+The router will try TACACS first for logins.
+
+If it cannot reach the servers, and you haven’t configured a fallback method, you will be locked out of remote (SSH) and potentially even console access.
+
+> Why console matters
+
+By default, once you enable aaa new-model, the console line also uses AAA unless you explicitly configure a fallback (none or local).
+
+That means: if TACACS is unreachable and no fallback is set → even the console will ask for TACACS auth → you’re stuck.
+
+You’re safe to leave console pointing at local forever (best practice) and TACACS on vty lines.
+
+Safe practice (before uplink is connected)
+
+You can pre-configure AAA and TACACS safely if you:
+
+Add a local fallback account:
+username admin privilege 15 secret <YourStrongPassword>
+aaa new-model
+aaa authentication login default group tacacs+ local
+aaa authorization exec default group tacacs+ local
+
+→ This way if TACACS is down/unreachable, the router falls back to local.
+
+Protect console access explicitly (so you never lose it):
+line con 0
+ login authentication local
+
+or even:
+line con 0
+ login local
+
+→ This forces the console to always accept the local user account, regardless of TACACS.
+
+Only enable VTY lines with TACACS after the uplink swap (optional safety step):
+
+line vty 0 4
+ login authentication default
+
+you can configure AAA/TACACS before swapping cables as long as you set local fallback and keep the console on local auth. Otherwise, you risk losing even console access.
