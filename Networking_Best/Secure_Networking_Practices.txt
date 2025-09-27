@@ -1,0 +1,48 @@
+Secure Networking Practices – Essential Guidelines for Modern Networks
+=====================================================================
+
+1. Disable Unused Services and Ports
+   - Always shut down interfaces or services not in active use.
+   - Helps minimize attack surfaces and prevents unauthorized access.
+
+2. Use Strong Authentication
+   - Implement multi-factor authentication (MFA) wherever supported.
+   - For routers and switches, use TACACS+ or RADIUS instead of local passwords.
+
+3. Encrypt All Management Access
+   - Always prefer SSH over Telnet for remote access.
+   - Use HTTPS instead of HTTP for device management.
+
+4. Implement Network Segmentation
+   - Separate user, management, and server networks using VLANs or firewalls.
+   - Prevents lateral movement in case of a security breach.
+
+5. Regularly Update Firmware and IOS
+   - Keep network devices patched against known vulnerabilities.
+   - Subscribe to vendor security advisories (Cisco, Juniper, etc.)
+
+6. Enable Logging and Monitor Regularly
+   - Send syslog messages to a centralized log server.
+   - Regularly review authentication and connection logs.
+
+7. Use Access Control Lists (ACLs)
+   - Restrict access to critical network resources by IP or port.
+   - Example: Allow SSH only from trusted management subnets.
+
+8. Backup and Version-Control Configurations
+   - Maintain periodic configuration backups.
+   - Store securely with restricted access and version tracking.
+
+9. Apply the Principle of Least Privilege
+   - Limit admin rights to essential personnel.
+   - Create read-only accounts for monitoring and audits.
+
+10. Secure Physical Access
+    - Lock down console ports and keep network devices in secure rooms.
+    - Physical access = full control, so protect devices physically.
+
+---
+
+🛡️ These guidelines strengthen the confidentiality, integrity, and availability (CIA) of network infrastructure.
+Contributed by: ROSPL07
+Date: 27/09/2025
