@@ -27,4 +27,30 @@ If we wish to save and exit Vim in a single command, you can either use :x or :w
 
  You can navigate through different locations of the screen by using H, M, or L, which will move your cursor to the top ("H"igh), "M"iddle, or bottom ("L"ow) part of the screen. However, unlike many other Vim commands, these will not move your cursor to a new screen; the navigation will only occur with what is currently visible. However, you can use the CTRL + f key combination to move to the next screen, or CTRL + b to move backward a screen. If pressed multiple times (and the current file in the buffer is long enough to span several screens), these two commands will continue to paginate forward or backward through the screens.
 
- 
+ Like most Vim commands, you can preface the curly brace with a number to move a given number of paragraphs at a time; for example, using 4{ will skip to the front of the 4th paragraph from your cursor.
+
+ Finally, it may be necessary to jump to the beginning of the file, no matter where you're at. In these instances, a quick press of gg will take you all the way home.
+
+ use of Vim is searching for a string within a given buffer. This is done by typing :/<string>, where <string> is the text you want to find within the document. Using the / search, Vim will search the document in the forward direction for an instance of that string and move the cursor to that instance of it. To move to the next instance of that string, press the n key—or you can move to the previous instance of that string by typing N. In some instances, it may be advantageous to search for a string in the reverse direction (from the cursor position to the beginning of the document), which can be accomplished by using the :?<string> command, with both n and N performing the same functions as the other direction.
+
+ However, there are also myriad other settings that can be enabled to make your Vim experience more visually appealing. Each of these settings is accessed through "command" mode (typing a : when in "normal" mode) and configured within Vim using the set keyword, followed by the setting you wish to change. There are hundreds of possible settings, but in the interest of brevity, I'll list just a few common ones that I have set on all Vim instances across the systems that I interact with.
+
+set bg=dark: Tweaks the color palette of Vim to look better on dark background terminals
+
+set tabstop=2: Defines tabs to be equal to two spaces (helpful when working with YAML)
+
+set softtabstop=2: Defines that every press of the Tab key will move the cursor forward two spaces
+
+set shiftwidth=2: Defines how many spaces makes up a column of "indentation"
+
+set epandtab: Converts all Tab characters to spaces
+
+Note: We generally will set tabstop, softtabstop, and shiftwidth to be the same value 99.999 percent of the time, so it may seem pedantic to set them all. If we're working with YAML, the stops of 2 will make the file easier to read.
+
+set number relativenumber: Each of these can be used separately. However, setting them both together provides the absolute line number that you're currently on and the relative numbers (how many lines away) that each other line is. This allows you to see which current line you're on and then how many you'd need to jump/skip if you wish to move to another line.
+
+set cursorcolumn: This provides a vertical column across the buffer to indicate where you are in relation to other lines. This is another helpful tool when working with YAML files.
+
+set hlsearch: This highlights all search matches within the buffer.
+
+This list of settings is by no means exhaustive. However, a few simple tweaks definitely can increase the usability of Vim by a large amount. If you exit Vim, you may notice that any settings you applied are not persistent upon a restart of the application. In order to make these settings stick, you need to place them inside of a configuration file, which is ~/.vimrc by default. If you add those settings to a file under that name, or simply download the sample vimrc file within this tutorial, rename it (add the . before the filename), and move it to the appropriate location. You'll see that these settings are now persistent.
