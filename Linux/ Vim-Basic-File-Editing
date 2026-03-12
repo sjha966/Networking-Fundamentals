@@ -1,0 +1,30 @@
+Writing Your First Text with `Vim`
+Let's start by making a folder for the files that we'll be creating and working with, using the terminal of our choice:
+
+mkdir ~/vim-introduction
+cd ~/vim-introduction
+
+By default, when vim is started, you are in "normal" mode, which allows you to use keyboard shortcuts to navigate through the text. In order to add text, we need to enter "insert" mode by pressing the i key. This will allow you to enter text just as you would within any other text editor. You will see the bottom of the terminal window change to show -- INSERT --, indicating the mode of operation you're currently in.
+
+As you're typing, make sure to press the Return key to add a few lines of text. Just because the text wraps around the width of your terminal doesn't make a new line in the eyes of vim.
+
+you can exit "insert" mode and return to "normal" mode by pressing the Esc key. You should see the -- INSERT -- disappear from the bottom of the window. You can now move around the body of the text you have written with the keyboard. If you would like to add more text, you can either use the i key to insert more text, or you can use the a key, which will "append" text to the file. (Place the text after the cursor, rather than before it.)
+
+On every modern installation of Vim, the arrow keys will work successfully to move you around the document a character or line at a time. This is perfectly acceptable.
+
+It may be beneficial to jump to the beginning or end of a line of text. From wherever your cursor is, you can press the 0 key, and it will return you to the beginning of the line. I choose to think of this as moving to "column 0." To move to the end of the given line of text, you can press the $ key and it will return you to the end of the line. 
+
+If we wish to move forward a single word at a time, we use the w key in normal mode. To move back one word, we can use the b key.
+
+If you want to skip on "space delineated" words (skipping over punctuation), use the capital letters B and W. This will treat items with punctuation (like IP addresses) as a single item. It is also possible to combine these two pieces together by typing something like 3W or 2B, which will move ahead three or back two WORDS.
+
+Saving Your Document:
+
+Within vim, if we choose to save the document, we can do so by typing :w, followed by pressing <ENTER>. This "writes" the on-screen text (known as a buffer in Vim-speak) to a file. If we attempt to use this command on our current buffer, which has no file associated with it, we'll receive an error message indicating that no filename exists. For this to work, we'll need to add a filename at the end of the command, like :w vim-test-1.txt followed by <ENTER>. Vim will indicate that the file has been written.
+
+If we wish to save and exit Vim in a single command, you can either use :x or :wq (appending the desired filename as appropriate). Each of these commands will save the current text in the buffer and return you to the shell. If you wish to exit Vim, you can use :q to "quit"; however, if there is text in the buffer that has not been written to a file, Vim will not let you quit without either saving the buffer or overriding the quit action, which can be done by typing :q!.
+
+
+ You can navigate through different locations of the screen by using H, M, or L, which will move your cursor to the top ("H"igh), "M"iddle, or bottom ("L"ow) part of the screen. However, unlike many other Vim commands, these will not move your cursor to a new screen; the navigation will only occur with what is currently visible. However, you can use the CTRL + f key combination to move to the next screen, or CTRL + b to move backward a screen. If pressed multiple times (and the current file in the buffer is long enough to span several screens), these two commands will continue to paginate forward or backward through the screens.
+
+ 
